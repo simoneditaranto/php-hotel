@@ -60,35 +60,50 @@
         <div class="container p-3">
             <h1>PHP - Hotel</h1>
 
-            <ul>
+            <table class="table">
 
-                <?php
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrizione</th>
+                        <th scope="col">Parcheggio</th>
+                        <th scope="col">Voto</th>
+                        <th scope="col">Distanza dal centro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
 
-                    // ciclo tutto l'array di hotel tramite un foreach
-                    foreach($hotels as $currentHotel) {
-                        
-                        echo "
-                        <li>
-                            <ul>
-                        ";
-
-                        foreach($currentHotel as $currentProperty => $value) {
+                        // ciclo tutto l'array di hotel tramite un foreach
+                        foreach($hotels as $currentHotel) {
+                            
                             echo "
-                            <li>
-                                $currentProperty : " . $value .  "
-                            </li>";
+                            <tr>                         
+                            ";
+
+                            foreach($currentHotel as $currentProperty => $value) {
+                                if($currentProperty == 'parking') {
+                                    if($value) {
+                                        $value = "SI";
+                                    } else {
+                                        $value = "NO";
+                                    };
+                                };
+                                echo "
+                                <td>
+                                    $value
+                                </td>";
+                            };
+
+                            echo "
+                            </tr>
+                            ";
+
                         };
 
-                        echo "
-                        </ul>
-                            </li>
-                        ";
-
-                    };
-
-                ?>
-
-            </ul>
+                    ?>
+                </tbody>
+            </table>
 
         </div>
         
