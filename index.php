@@ -79,16 +79,17 @@
 
     <body>
 
-        <div class="container p-3">
+        <div class="container p-3 mt-3 border border-primary rounded-3">
             <h1>PHP - Hotel</h1>
 
-            <form action="index.php">
+            <label for="form">Cerca qui l'hotel che fa al caso tuo:</label>
+            <form action="index.php" class="d-flex align-items-center gap-2 p-3 border border-secondary rounded-3">
                 <label for="hotel-parking">Parcheggio</label>
                 <input type="checkbox" id="hotel-parking" name="hotel-parking" value="true">
                 <label for="hotel-avg">Voto:</label>
                 <input type="number" name="hotel-avg" id="hotel-avg" min="0" max="5">
 
-                <input type="submit" value="Submit">
+                <input type="submit" value="Trova Hotel" class="btn btn-outline-success">
             </form>
 
             <table class="table">
@@ -108,26 +109,43 @@
                         // ciclo tutto l'array di hotel tramite un foreach
                         foreach($hotels as $currentHotel) {
                             
-                            echo "
-                            <tr>                         
-                            ";
-
-                            foreach($currentHotel as $currentProperty => $value) {
-                                if($currentProperty == 'parking') {
-                                    if($value) {
-                                        $value = "SI";
-                                    } else {
-                                        $value = "NO ";
-                                    };
-                                };
+                           echo "
+                                <tr>
+                                    <td class=text-primary>$currentHotel[name]</td>                     
+                                    <td>$currentHotel[description]</td>
+                                ";
+                                if($currentHotel['parking']) {
+                                    echo "
+                                            <td class=text-success>
+                                                SI
+                                            </td>
+                                        ";
+                                } else {
+                                    echo "
+                                            <td class=text-danger>
+                                                NO
+                                            </td>
+                                        ";
+                                }
+                                    
+                               if($currentHotel['vote'] > 3) {
                                 echo "
-                                <td>
-                                    $value
-                                </td>";
-                            };
+                                        <td class=text-warning
+                                        >
+                                            $currentHotel[vote]
+                                        </td>
+                                    ";
+                               } else {
+                                echo "
+                                        <td>
+                                            $currentHotel[vote]
+                                        </td>
+                                    ";
+                               };
 
-                            echo "
-                            </tr>
+                                echo "                       
+                                    <td>$currentHotel[distance_to_center]</td>
+                                </tr>
                             ";
 
                         };
@@ -138,7 +156,7 @@
 
         </div>
 
-        <div class="container p-3">
+        <div class="container p-3 mt-3 border border-info-subtle rounded-3">
             <h1>Hotel filtrati</h1>
 
             <table class="table">
