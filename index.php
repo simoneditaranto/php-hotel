@@ -60,6 +60,36 @@
         <div class="container p-3">
             <h1>PHP - Hotel</h1>
 
+            <ul>
+
+                <?php
+
+                    // ciclo tutto l'array di hotel tramite un foreach
+                    foreach($hotels as $currentHotel) {
+                        
+                        echo "
+                        <li>
+                            <ul>
+                        ";
+
+                        foreach($currentHotel as $currentProperty => $value) {
+                            echo "
+                            <li>
+                                $currentProperty : " . $value .  "
+                            </li>";
+                        };
+
+                        echo "
+                        </ul>
+                            </li>
+                        ";
+
+                    };
+
+                ?>
+
+            </ul>
+
         </div>
         
 
