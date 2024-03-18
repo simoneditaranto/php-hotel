@@ -41,17 +41,25 @@
     ];
 
     $is_filtered = $_GET['hotel-parking'];
+    $hotel_avg = $_GET['hotel-avg'];
 
     if($is_filtered)
     {
         $hotel_filtered = [];
         foreach($hotels as $currentHotel) {
-            if($currentHotel['parking']) {
+            if($currentHotel['parking'] && $currentHotel['vote'] >= $hotel_avg) {
                 $hotel_filtered[] = $currentHotel;
             };
         };
         // var_dump($hotel_filtered);
         // test
+    } else {
+        $hotel_filtered = [];
+        foreach($hotels as $currentHotel) {
+            if($currentHotel['vote'] >= $hotel_avg) {
+                $hotel_filtered[] = $currentHotel;
+            };
+        };
     };
                     
 
@@ -74,7 +82,7 @@
     <body>
 
         <div class="container p-3">
-            <h1>Hotel con parcheggio</h1>
+            <h1>Hotel filtrati</h1>
 
             <table class="table">
                 <thead>

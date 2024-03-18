@@ -61,8 +61,10 @@
             <h1>PHP - Hotel</h1>
 
             <form action="hotel-filtered.php">
-                <input type="checkbox" id="hotel-parking" name="hotel-parking" value="true">
                 <label for="hotel-parking">Parcheggio</label>
+                <input type="checkbox" id="hotel-parking" name="hotel-parking" value="true">
+                <label for="hotel-avg">Voto:</label>
+                <input type="number" name="hotel-avg" id="hotel-avg" min="0" max="5">
 
                 <input type="submit" value="Submit">
             </form>
