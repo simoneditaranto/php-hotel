@@ -40,6 +40,22 @@
 
     ];
 
+    $is_filtered = $_GET['hotel-parking'];
+
+    if($is_filtered)
+    {
+        $hotel_filtered = [];
+        foreach($hotels as $currentHotel) {
+            if($currentHotel['parking']) {
+                $hotel_filtered[] = $currentHotel;
+            };
+        };
+        // var_dump($hotel_filtered);
+        // test
+    };
+                    
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -58,17 +74,9 @@
     <body>
 
         <div class="container p-3">
-            <h1>PHP - Hotel</h1>
-
-            <form action="hotel-filtered.php">
-                <input type="checkbox" id="hotel-parking" name="hotel-parking" value="true">
-                <label for="hotel-parking">Parcheggio</label>
-
-                <input type="submit" value="Submit">
-            </form>
+            <h1>Hotel con parcheggio</h1>
 
             <table class="table">
-
                 <thead>
                     <tr>
                         <th scope="col">Nome</th>
@@ -79,11 +87,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
 
+                    <?php
                         // ciclo tutto l'array di hotel tramite un foreach
-                        foreach($hotels as $currentHotel) {
-                            
+                        foreach($hotel_filtered as $currentHotel) {
                             echo "
                             <tr>                         
                             ";
@@ -109,6 +116,7 @@
                         };
 
                     ?>
+
                 </tbody>
             </table>
 
