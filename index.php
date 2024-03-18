@@ -40,6 +40,28 @@
 
     ];
 
+    $is_filtered = $_GET['hotel-parking'];
+    $hotel_avg = $_GET['hotel-avg'];
+
+    if($is_filtered)
+    {
+        $hotel_filtered = [];
+        foreach($hotels as $currentHotel) {
+            if($currentHotel['parking'] && $currentHotel['vote'] >= $hotel_avg) {
+                $hotel_filtered[] = $currentHotel;
+            };
+        };
+        // var_dump($hotel_filtered);
+        // test
+    } elseif($hotel_avg > 0) {
+        $hotel_filtered = [];
+        foreach($hotels as $currentHotel) {
+            if($currentHotel['vote'] >= $hotel_avg) {
+                $hotel_filtered[] = $currentHotel;
+            };
+        };
+    };
+
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +82,7 @@
         <div class="container p-3">
             <h1>PHP - Hotel</h1>
 
-            <form action="hotel-filtered.php">
+            <form action="index.php">
                 <label for="hotel-parking">Parcheggio</label>
                 <input type="checkbox" id="hotel-parking" name="hotel-parking" value="true">
                 <label for="hotel-avg">Voto:</label>
@@ -111,6 +133,66 @@
                         };
 
                     ?>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="container p-3">
+            <h1>Hotel filtrati</h1>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrizione</th>
+                        <th scope="col">Parcheggio</th>
+                        <th scope="col">Voto</th>
+                        <th scope="col">Distanza dal centro</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <?php
+                        if($is_filtered || $hotel_avg > 0) {
+
+                            foreach($hotel_filtered as $currentHotel) {
+                                echo "
+                                <tr>                         
+                                ";
+    
+                                foreach($currentHotel as $currentProperty => $value) {
+                                    if($currentProperty == 'parking') {
+                                        if($value) {
+                                            $value = "SI";
+                                        } else {
+                                            $value = "NO ";
+                                        };
+                                    };
+                                    echo "
+                                    <td>
+                                        $value
+                                    </td>";
+                                };
+    
+                                echo "
+                                </tr>
+                                ";
+    
+                            };
+                        } else {
+                            echo "
+                                <span class=text-danger>
+                                Nessun ricerca effettuata
+                                </span>
+                            ";
+                        }
+
+                        $hotel_filtered = [];
+                        // ciclo tutto l'array di hotel tramite un foreach
+
+                    ?>
+
                 </tbody>
             </table>
 
